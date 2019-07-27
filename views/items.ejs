@@ -1,3 +1,5 @@
+<% include partials/header %>
+
 <h1> List of all items </h1>
 <% items.forEach(item => { %>
   <div>
@@ -7,3 +9,5 @@
     <img src="<%= item.image %>">
   </div>
 <% }); %>
+
+<% include partials/footer %>
