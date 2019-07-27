@@ -6,9 +6,12 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
 var items = [
-  {name: "Item1", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0SdgzrHXWk4Bnf-bFtxYprEpa37VgQnLWXD4XbQefZSy77a10", price: 12},
-  {name: "Item2", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0SdgzrHXWk4Bnf-bFtxYprEpa37VgQnLWXD4XbQefZSy77a10", price: 12},
-  {name: "Item3", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0SdgzrHXWk4Bnf-bFtxYprEpa37VgQnLWXD4XbQefZSy77a10", price: 12}
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10},
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10},
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10},
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10},
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10},
+  {name: "Item1", image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420", price: 10}
 ];
 
 

@@ -1,17 +1,46 @@
 <% include partials/header %>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbard-brand" href="/">HuskyShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/"> Login </a></li>
+            <li class="nav-item"><a class="nav-link" href="/"> Login </a></li>
+            <li class="nav-item"><a class="nav-link" href="/"> Login </a></li>
+          </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+<header class="jumbotron">
+  <div class="container">
+  <h1> List of all items </h1>
+  <p> Contact vendors to buy items you like</p>
+  <p>
+    <a class="btn btn-primary btn-lg" href="/items/new"> Add new item </a>
+  </p>
+    </div>
 
-<h1> List of all items </h1>
+</header>
 
-<a href="/items/new"> Add new item </a>
-<% items.forEach(item => { %>
-  <div>
-    <h4>
-      <%= item.name %>
-    </h4>
-    <img src="<%= item.image %>">
-  </div>
-<% }); %>
-<a href="/"> Home </a>
+<div class="row">
+  <% items.forEach(item => { %>
+    <div class= "col-sm-6 col-md-3">
+    <div class="card">
+      <img class="card-img-top" src="<%= item.image %>">
+      <div class="card-body"><p class="card-text">  <%= item.name %>  </p></div>
+    </div>
+    </div>
+  <% }); %>
+</div>
+
+  <a href="/"> Home </a>
+</div>
+
+
 
 
 <% include partials/footer %>
