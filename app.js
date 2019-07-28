@@ -2,6 +2,7 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
+    seedDb = require("./seeds"),
     BoardItem = require("./models/item"),
     Comment = require("./models/comment"),
     User = require("./models/user");
@@ -11,6 +12,8 @@ mongoose.connect("mongodb://localhost/husky_board");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
+
+seedDb();
 
 
 // BoardItem.create(
