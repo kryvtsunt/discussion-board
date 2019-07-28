@@ -10,24 +10,26 @@ app.use(bodyParser.urlencoded({extended: true}));
 // SCHEMA
 var boardItemSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 var BoardItem = mongoose.model("BoardItem", boardItemSchema);
 
-// BoardItem.create(
-//   {
-//     name: "First Item",
-//     image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420"
-//   }, function(err, item){
-//     if(err){
-//       console.log(err)
-//     } else {
-//       console.log("Created Item");
-//       console.log(item);
-//     }
-//   }
-// );
+BoardItem.create(
+  {
+    name: "First Item",
+    image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420",
+    description: "simple"
+  }, function(err, item){
+    if(err){
+      console.log(err)
+    } else {
+      console.log("Created Item");
+      console.log(item);
+    }
+  }
+);
 
 
 app.get("/", function(req, res){
@@ -47,7 +49,8 @@ app.get("/items", function(req, res){
 app.post("/items", function(req, res){
     var name = req.body.name;
     var image = req.body.image;
-    var newItem = {name: name, image:image};
+    var description = req.body.description;
+    var newItem = {name: name, image:image, description: description};
     BoardItem.create(newItem, function(err, item){
       if(err){
         console.log(err);
@@ -60,6 +63,16 @@ app.post("/items", function(req, res){
 
 app.get("/items/new", function(req, res){
     res.render("new");
+})
+
+app.get("/items/:id", function(req, res){
+    BoardItem.findById(req.params.id, function(err, item){
+      if(err){
+        console.log(err);
+      } else {
+        res.render("show", {item: item})
+      }
+  });
 })
 
 

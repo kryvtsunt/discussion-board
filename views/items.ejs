@@ -32,6 +32,7 @@
     <div class="card" style="margin: 10px auto;">
       <img class="card-img-top" src="<%= item.image %>">
       <div class="card-body"><p class="card-text">  <%= item.name %>  </p></div>
+      <a href="/items/<%= item._id %>" class="btn btn-info">More Info </a>
     </div>
     </div>
   <% }); %>
