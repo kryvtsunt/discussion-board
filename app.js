@@ -1,35 +1,32 @@
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    BoardItem = require("./models/item"),
+    Comment = require("./models/comment"),
+    User = require("./models/user");
+
 
 mongoose.connect("mongodb://localhost/husky_board");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
-// SCHEMA
-var boardItemSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
 
-var BoardItem = mongoose.model("BoardItem", boardItemSchema);
 
-BoardItem.create(
-  {
-    name: "First Item",
-    image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420",
-    description: "simple"
-  }, function(err, item){
-    if(err){
-      console.log(err)
-    } else {
-      console.log("Created Item");
-      console.log(item);
-    }
-  }
-);
+// BoardItem.create(
+//   {
+//     name: "First Item",
+//     image: "https://images.contentful.com/q602vtcuu3w3/6CGViz02AM2aOiyWYo4EQ4/6f74f2e5e34679a35ac329f5a194988d/Group_10.jpg?q=80&w=420",
+//     description: "simple"
+//   }, function(err, item){
+//     if(err){
+//       console.log(err)
+//     } else {
+//       console.log("Created Item");
+//       console.log(item);
+//     }
+//   }
+// );
 
 
 app.get("/", function(req, res){
