@@ -66,10 +66,11 @@ app.get("/items/new", function(req, res){
 })
 
 app.get("/items/:id", function(req, res){
-    BoardItem.findById(req.params.id, function(err, item){
+    BoardItem.findById(req.params.id).populate("comments").exec(function(err, item){
       if(err){
         console.log(err);
       } else {
+        console.log(item);
         res.render("show", {item: item})
       }
   });
