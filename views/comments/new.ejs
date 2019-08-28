@@ -3,7 +3,7 @@
 <div class="container">
     <h1 style="text-align: center"> Add New Comment to <%= item.name %> </h1>
     <div style="width: 30%; margin: 30px auto">
-    <form action="/items/<%= item._id %>", method="POST">
+    <form action="/items/<%= item._id %>/comments", method="POST">
       <div class="form-group">
         <input class="form-control" type="text" name=comment[text]" placeholder="text">
       </div>

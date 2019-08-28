@@ -84,6 +84,26 @@ app.get("/items/:id/comments/new", function(req, res){
       res.render("comments/new", {item: item});
     }
   });
+});
+
+app.post("/items/:id/comments", function(req, res){
+  BoardItem.findById(req.params.id, function(err, item){
+    if (err){
+      console.log(err);
+      res.redirec("items");
+    } else {
+      console.log(req.body.comment);
+      Comment.create(req.body.comment, function(err, comment){
+        if(err){
+          console.log(err);
+        } else {
+          item.comments.push(comment);
+          item.save();
+          res.redirect("/items/" + item._id);
+        }
+      })
+    }
+  });
 })
 
 

@@ -4,6 +4,7 @@
   <h4><%= item.name %></h4>
   <img src= " <%= item.image %>">
   <p><%= item.description%> </p>
+  <p><a class="btn btn-primary" href="/items/<%=item._id%>/comments/new"> Add New Comment </a> </p>
 </div>
 
 <% item.comments.forEach(function(comment){ %>
