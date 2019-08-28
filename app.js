@@ -41,7 +41,7 @@ app.get("/items", function(req, res){
       if (err){
         console.log(err);
       } else {
-        res.render("items", {items: items});
+        res.render("items/items", {items: items});
       }
     })
 });
@@ -55,15 +55,15 @@ app.post("/items", function(req, res){
       if(err){
         console.log(err);
       } else {
-        res.redirect("/items");
+        res.redirect("items/items");
       }
     })
 
-})
+});
 
 app.get("/items/new", function(req, res){
-    res.render("new");
-})
+    res.render("items/new");
+});
 
 app.get("/items/:id", function(req, res){
     BoardItem.findById(req.params.id).populate("comments").exec(function(err, item){
@@ -71,8 +71,18 @@ app.get("/items/:id", function(req, res){
         console.log(err);
       } else {
         console.log(item);
-        res.render("show", {item: item})
+        res.render("items/show", {item: item})
       }
+  });
+});
+
+app.get("/items/:id/comments/new", function(req, res){
+  BoardItem.findById(req.params.id, function(err, item){
+    if (err){
+      console.log(err);
+    } else {
+      res.render("comments/new", {item: item});
+    }
   });
 })
 
