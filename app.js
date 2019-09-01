@@ -11,6 +11,7 @@ var express = require("express"),
 mongoose.connect("mongodb://localhost/husky_board");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"))
 
 
 seedDb();
