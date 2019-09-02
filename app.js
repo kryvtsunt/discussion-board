@@ -6,7 +6,7 @@ var express = require("express"),
     BoardItem = require("./models/item"),
     Comment = require("./models/comment"),
     passport = require("passport"),
-    LocaleStrategy = require("passport-local"),
+    LocalStrategy = require("passport-local"),
     User = require("./models/user");
 
 
@@ -17,6 +17,18 @@ app.use(express.static(__dirname + "/public"))
 
 
 seedDb();
+
+// PASSPORT
+app.use(require("express-session")({
+  secret: "kasaloma",
+  resave: false,
+  saveUnitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 // BoardItem.create(
