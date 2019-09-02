@@ -91,7 +91,7 @@ app.get("/items/:id", function(req, res){
   });
 });
 
-app.get("/items/:id/comments/new", function(req, res){
+app.get("/items/:id/comments/new", isLoggedIn, function(req, res){
   BoardItem.findById(req.params.id, function(err, item){
     if (err){
       console.log(err);
@@ -101,7 +101,7 @@ app.get("/items/:id/comments/new", function(req, res){
   });
 });
 
-app.post("/items/:id/comments", function(req, res){
+app.post("/items/:id/comments", isLoggedIn,  function(req, res){
   BoardItem.findById(req.params.id, function(err, item){
     if (err){
       console.log(err);
@@ -147,7 +147,7 @@ app.get("/login", function(req, res){
 
 app.post("/login", passport.authenticate("local",
 {
-  sucesRedirect: "/items",
+  successRedirect: "/items",
   failureRedirect: "/login"
 }), function(req, res){
 });
@@ -155,7 +155,15 @@ app.post("/login", passport.authenticate("local",
 app.get("/logout", function(req, res){
   req.logout();
   res.redirect("campgrounds");
-})
+});
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect("/login");
+  }
+}
 
 
 
