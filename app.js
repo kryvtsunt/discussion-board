@@ -5,6 +5,8 @@ var express = require("express"),
     seedDb = require("./seeds"),
     BoardItem = require("./models/item"),
     Comment = require("./models/comment"),
+    passport = require("passport"),
+    LocaleStrategy = require("passport-local"),
     User = require("./models/user");
 
 
