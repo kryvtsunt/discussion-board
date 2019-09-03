@@ -7,28 +7,36 @@ var express = require("express"),
     Comment = require("./models/comment"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
-    User = require("./models/user");
+    User = require("./models/user"),
+    session = require("express-session");
 
 
 mongoose.connect("mongodb://localhost/husky_board");
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + "/public"))
 
 
 seedDb();
 
 // PASSPORT
-app.use(require("express-session")({
-  secret: "kasaloma",
+app.use(session({
+  secret: 'kasaloma',
   resave: false,
   saveUnitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
 
 
 // BoardItem.create(
