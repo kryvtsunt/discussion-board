@@ -13,11 +13,13 @@ router.get("/", function(req, res){
     })
 });
 
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
-    var newItem = {name: name, image:image, description: description};
+    var author = {id: req.user._id, username: req.user.username}
+    var newItem = {name: name, image:image, description: description, author: author};
+    console.log(newItem);
     BoardItem.create(newItem, function(err, item){
       if(err){
         console.log(err);
@@ -28,7 +30,7 @@ router.post("/", function(req, res){
 
 });
 
-router.get("/new", function(req, res){
+router.get("/new", isLoggedIn, function(req, res){
     res.render("items/new");
 });
 
@@ -42,5 +44,13 @@ router.get("/:id", function(req, res){
       }
   });
 });
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect("/login");
+  }
+}
 
 module.exports = router;

@@ -16,13 +16,13 @@ module.exports = function seedDB(){
       console.log("items successfully removed");
     }
   });
-  data.forEach(function(seed){
-    BoardItem.create(seed, function(err, data){
-      if (err){
-        console.log(err);
-      } else {
-        console.log("added a new item");
-      }
-    });
-  });
+  // data.forEach(function(seed){
+  //   BoardItem.create(seed, function(err, data){
+  //     if (err){
+  //       console.log(err);
+  //     } else {
+  //       console.log("added a new item");
+  //     }
+  //   });
+  // });
 };
