@@ -3,7 +3,6 @@ var router = express.Router({mergeParams: true});
 var BoardItem = require("../models/item");
 var Comment = require("../models/comment");
 
-
 router.get("/new", isLoggedIn, function(req, res){
   BoardItem.findById(req.params.id, function(err, item){
     if (err){
@@ -25,6 +24,9 @@ router.post("", isLoggedIn,  function(req, res){
         if(err){
           console.log(err);
         } else {
+          comment.author.username = req.user.username;
+          comment.author,id = req.user._id;
+          comment.save();
           item.comments.push(comment);
           item.save();
           res.redirect("/items/" + item._id);

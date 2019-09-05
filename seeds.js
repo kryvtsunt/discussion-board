@@ -10,7 +10,7 @@ var data = [
 
 module.exports = function seedDB(){
   BoardItem.remove({}, function(err){
-    if (err){
+    if (err) {
       console.log(err);
     } else {
       console.log("items successfully removed");
@@ -22,15 +22,6 @@ module.exports = function seedDB(){
         console.log(err);
       } else {
         console.log("added a new item");
-        Comment.create({text: "Great item", author: "Tim"}, function(err, comment){
-          if (err){
-            console.log(err);
-          } else {
-            data.comments.push(comment);
-            data.save();
-            console.log("added a comment");
-          }
-        });
       }
     });
   });
