@@ -46,14 +46,10 @@ router.get("/:id", function(req, res){
   });
 });
 
-router.get("/:id/edit", function(req, res){
-  BoardItem.findById(req.params.id, function(err, item){
-    if (err){
-      res.redirect("/items");
-    } else {
-      res.render("items/edit", {item: item});
-    }
-  });
+router.get("/:id/edit", checkOwnership, function(req, res){
+    BoardItem.findById(req.params.id, function(err, item){
+          res.render("items/edit", {item: item});
+      });
 });
 
 router.put("/:id", function(req, res){
@@ -75,6 +71,26 @@ router.delete("/:id", function(req, res){
     }
   })
 });
+
+
+function checkOwnership(req, res, next){
+  if (req.isAuthenticated()){
+    BoardItem.findById(req.params.id, function(err, item){
+      if (err){
+        res.redirect("back");
+      } else {
+        if (item.author.id.equals(req.user._id){
+          next():
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
+
+}
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
