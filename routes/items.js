@@ -66,6 +66,16 @@ router.put("/:id", function(req, res){
   });
 });
 
+router.delete("/:id", function(req, res){
+  BoardItem.findByIdAndRemove(req.params.id, function(err){
+    if (err){
+      res.redirect("/items");
+    } else {
+      res.redirect("/items");
+    }
+  })
+});
+
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
