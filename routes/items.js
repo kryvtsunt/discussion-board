@@ -69,7 +69,7 @@ router.delete("/:id", function(req, res){
     } else {
       res.redirect("/items");
     }
-  })
+  });
 });
 
 
@@ -79,8 +79,8 @@ function checkOwnership(req, res, next){
       if (err){
         res.redirect("back");
       } else {
-        if (item.author.id.equals(req.user._id){
-          next():
+        if (item.author.id.equals(req.user._id)){
+          next();
         } else {
           res.redirect("back");
         }

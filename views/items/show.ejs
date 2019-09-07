@@ -16,10 +16,12 @@
         <h4><%= item.name %></h4>
         <p><%= item.description%> </p>
         <p><em>Submitted by <%= item.author.username%></em></p>
+        <% if (currentUser && item.author.id.equals(currentUser._id)) { %>
         <a class="btn btn-warning" href="/items/<%= item._id %>/edit"> Edit </a>
         <form action="/items/<%= item._id%>?_method=DELETE" method="POST" id="dform">
           <button class="btn btn-danger"> Delete </button>
         </form>
+        <% } %>
       </div>
       <div class="">
         <div class="text-right">
