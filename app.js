@@ -8,7 +8,8 @@ var express = require("express"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     User = require("./models/user"),
-    session = require("express-session");
+    session = require("express-session"),
+    methodOverride = require("method-override");
 
 var commentRoutes = require("./routes/comments");
 var itemRoutes = require("./routes/items");
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(methodOverride("_method"));
 
 seedDb();
 

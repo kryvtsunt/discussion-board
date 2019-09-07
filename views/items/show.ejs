@@ -16,6 +16,7 @@
         <h4><%= item.name %></h4>
         <p><%= item.description%> </p>
         <p><em>Submitted by <%= item.author.username%></em></p>
+        <a class="btn btn-warning" href="/items/<%= item._id %>/edit"> Edit </a>
       </div>
       <div class="">
         <div class="text-right">

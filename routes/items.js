@@ -29,7 +29,6 @@ router.post("/", isLoggedIn, function(req, res){
         res.redirect("items");
       }
     })
-
 });
 
 router.get("/new", isLoggedIn, function(req, res){
@@ -44,6 +43,26 @@ router.get("/:id", function(req, res){
         console.log(item);
         res.render("items/show", {item: item})
       }
+  });
+});
+
+router.get("/:id/edit", function(req, res){
+  BoardItem.findById(req.params.id, function(err, item){
+    if (err){
+      res.redirect("/items");
+    } else {
+      res.render("items/edit", {item: item});
+    }
+  });
+});
+
+router.put("/:id", function(req, res){
+  BoardItem.findByIdAndUpdate(req.params.id, req.body.item, function(err, updatedItem){
+    if (err){
+      res.redirect("/items");
+    } else {
+      res.redirect("/items/" + req.params.id);
+    }
   });
 });
 
