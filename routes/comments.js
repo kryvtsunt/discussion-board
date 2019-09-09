@@ -25,7 +25,7 @@ router.post("", isLoggedIn,  function(req, res){
           console.log(err);
         } else {
           comment.author.username = req.user.username;
-          comment.author,id = req.user._id;
+          comment.author.id = req.user._id;
           comment.save();
           item.comments.push(comment);
           item.save();
@@ -35,6 +35,36 @@ router.post("", isLoggedIn,  function(req, res){
     }
   });
 });
+
+router.delete("/:comment_id", checkOwnership, function(req, res){
+  Comment.findByIdAndRemove(req.params.comment_id, function(err){
+    if (err){
+      res.redirect("back");
+    } else {
+      res.redirect("/items/" + req.params.id);
+    }
+  });
+});
+
+function checkOwnership(req, res, next){
+  if (req.isAuthenticated()){
+    Comment.findById(req.params.comment_id, function(err, comment){
+      if (err){
+        res.redirect("back");
+      } else {
+        console.log(comment);
+        console.log(comment.author);
+        if (comment.author.id.equals(req.user._id)){
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
+}
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
