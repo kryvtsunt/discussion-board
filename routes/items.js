@@ -89,7 +89,6 @@ function checkOwnership(req, res, next){
   } else {
     res.redirect("back");
   }
-
 }
 
 function isLoggedIn(req, res, next){
